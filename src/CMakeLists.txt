@@ -22,10 +22,12 @@ target_include_directories(psf PUBLIC ${PSF_INCLUDE})
 
 # static library
 add_library(psf_static STATIC ${PSF_SOURCE_FILES})
+set_target_properties(psf_static PROPERTIES VERSION ${PROJECT_VERSION})
+set_target_properties(psf_static PROPERTIES PUBLIC_HEADER "${PSF_INCLUDE_FILES}")
+set_target_properties(psf_static PROPERTIES INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
 target_include_directories(psf_static PRIVATE ${PSF_INCLUDE})
 
 configure_file(libpsf.pc.in libpsf.pc @ONLY)
-
 
 install(TARGETS psf psf_static
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
